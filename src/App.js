@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useReducer } from "react";
 
-function App() {
+const initialState = {
+  balance: 0,
+  loan: 0,
+  isActive: false,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "Activate":
+      return { ...state, isActive: true };
+    default:
+      return state;
+  }
+}
+
+export default function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <h1>useReducer Bank Account</h1>
+      <p>Balance: X</p>
+      <p>Loan: X</p>
+
+      <p>
+        <button
+          onClick={() => {
+            dispatch({ type: "Activate" });
+          }}
+          disabled={false}
         >
-          Learn React
-        </a>
-      </header>
+          Open account
+        </button>
+      </p>
+      <p>
+        <button onClick={() => {}} disabled={!state.isActive}>
+          Deposit 150
+        </button>
+      </p>
+      <p>
+        <button onClick={() => {}} disabled={!state.isActive}>
+          Withdraw 50
+        </button>
+      </p>
+      <p>
+        <button onClick={() => {}} disabled={!state.isActive}>
+          Request a loan of 5000
+        </button>
+      </p>
+      <p>
+        <button onClick={() => {}} disabled={!state.isActive}>
+          Pay loan
+        </button>
+      </p>
+      <p>
+        <button onClick={() => {}} disabled={!state.isActive}>
+          Close account
+        </button>
+      </p>
     </div>
   );
 }
-
-export default App;
